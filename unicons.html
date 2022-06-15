@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        .select2-icon {
+            width: 550px;
+        }
+    </style>
+</head>
+<body>
+
+    <select class="select2-icon">
+        <option></option>
+    </select>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $.getJSON('https://raw.githubusercontent.com/Iconscout/unicons/master/json/line.json', function(json){
+            // Make Select2 Friendly Format
+            var json2 = $.map(json, function (obj) {
+                var obj2 = {};
+                obj2.text = obj.tags.toString();;
+                obj2.id = obj.id;
+                obj2.name = obj.name;
+                return obj2;
+            });
+            // Declare Select2 Options
+            $('.select2-icon').select2({
+                data: json2,
+                placeholder: "Select an Unicons icon",
+                allowClear: true,
+                templateResult: function(state) {
+                    var $state = $('<span><i class="uil uil-'+state.name+'"></i> '+state.name+'</span>');
+                    return $state;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
